@@ -1,0 +1,49 @@
+OCLModel:
+    context*=ExpressionContext
+    lines+=ExpressionLine
+;
+
+ExpressionContext:
+    "context" targetClass+=Class[","] ("::" classMethod=Method)*
+;
+
+ExpressionLine:
+    condition=Condition":" expression=OCLExpression
+;
+
+Class:
+    name = ID
+;
+
+Method:
+    name=ID "(" vars*=Var ")"
+;
+
+Var:
+    name=ID ":" type=ID
+;
+
+Condition:
+    "inv" | "pre" | "post"
+;
+
+OCLExpression:
+    left=OCLExpressionAttribute operator=OCLExpressionOperator right=OCLExpressionValue
+;
+
+OCLExpressionAttribute:
+   atributeContext*=OCLExpressionAttributeContext attribute=ID
+;
+
+OCLExpressionAttributeContext:
+    targetClass = Class "."
+;
+
+
+OCLExpressionOperator:
+    ">=" | "<=" | ">" | "<" | "="
+;
+
+OCLExpressionValue:
+    INT | OCLExpressionAttribute
+;

@@ -1,0 +1,2 @@
+context Person::getName() 
+post: result = name
